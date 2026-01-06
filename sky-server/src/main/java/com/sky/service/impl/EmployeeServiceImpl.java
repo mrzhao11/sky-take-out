@@ -112,4 +112,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return new PageResult(total, records);
     }
+
+    /**
+     * 启用或禁用员工
+     *
+     * @param status
+     * @param id
+     */
+    public void startOrStop(Integer status, Long id) {
+//        Employee employee = new Employee();
+//        employee.setId(id);
+//        employee.setStatus(status);
+
+        Employee employee = Employee.builder()
+                .id(id)
+                .status(status)
+                .build();
+
+        // 这里传入employee对象是为了统一“更新模型”
+        // 传统可能是updateStatus方法，但后续可能还会有updatePassword、updateName等方法，会出现方法爆炸
+        // update方法是通用更新方法，这样就可以避免方法爆炸的问题
+        employeeMapper.update(employee);
+    }
 }
