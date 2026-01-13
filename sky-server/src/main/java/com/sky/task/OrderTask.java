@@ -57,7 +57,7 @@ public class OrderTask {
         log.info("处理已送达订单的定时任务执行了", LocalDateTime.now());
 
         // 获取当前时间60分钟前的时间点
-        LocalDateTime orderTime = LocalDateTime.now().minusMinutes(-60);
+        LocalDateTime orderTime = LocalDateTime.now().plusMinutes(-60);
 
         List<Orders> ordersList = orderMapper.getByStatusAndOrdertimeLT(Orders.DELIVERY_IN_PROGRESS, orderTime);
 
